@@ -1,7 +1,7 @@
 <div>
     <div>    
         <mat-toolbar class="tool" fxLayout="row" fxLayoutAlign="space-around center">
-            <a href="http://localhost:4200/dashboard" style="color: white;"><span><img src="../../../assets/images/education.svg" />BookStore</span></a>
+            <a href="http://localhost:4200/dashboard" style="color: white;"><span><img src="../../../assets/images/education.svg" />e-book</span></a>
                 <span>My Orders</span>
             <div>
             <button
@@ -60,29 +60,44 @@
         </mat-toolbar>    
     </div>
     <div class="table-responsive">
-        <table>
-            <tr>
-                <th>S No.</th>
-                <th>Book Name</th>
-                <th>Quantity</th>
-                <th>Total Price</th>
-                <th>Vendor Name</th>
-                <th>Review</th>
-            </tr>
-              <tr *ngFor="let book of orderedbooks;index as i">
-                <td>{{i+1}}</td>
-                <td>{{book.bookName}}</td>
-                <td>{{book.qunatity}}</td>
-                <td>{{book.totelPrice}}</td>
-                <td>{{book.venderName}}</td>
-                <div *ngIf="book.review==0;then ReviewText;else rating"></div>
-                <ng-template #ReviewText>
-                  <td (click)="openDialog(book)"><button style="border: none;background-color: inherit;outline: none;color: rgb(179, 59, 59);">Review</button></td>
-                </ng-template>
-                <ng-template #rating>
-                  <td (click)="openDialog(book)"><button style="border: none;background-color: inherit;outline: none;color: rgb(179, 59, 59);">{{book.review}}</button></td>
-                </ng-template>
-              </tr>
-        </table>
+      <table>
+        <tr>
+            <th>Info.</th>
+            <th>Items</th>
+        </tr>
+          <tr *ngFor="let order of orders;index as i">
+            <td>
+              <p>#: {{i+1}}</p>
+              <p>Order ID: {{order.orderId}}</p>
+              <p>Order Date: {{order.orderDate | date: 'long'}}</p>
+            </td>
+            <td>
+              <table *ngIf="order.items">
+                <tr>
+                    <th>S No.</th>
+                    <th>Book Name</th>
+                    <th>Quantity</th>
+                    <th>Total Price</th>
+                    <th>Vendor Name</th>
+                    <th>Review</th>
+                </tr>
+                <tr *ngFor="let book of order.items;index as i">
+                  <td>{{i+1}}</td>
+                  <td>{{book.bookName}}</td>
+                  <td>{{book.quantity}}</td>
+                  <td>{{book.totalPrice}}</td>
+                  <td>{{book.venderName}}</td>
+                  <div *ngIf="book.review==0;then ReviewText;else rating"></div>
+                  <ng-template #ReviewText>
+                    <td (click)="openDialog(book)"><button style="border: none;background-color: inherit;outline: none;color: rgb(179, 59, 59);">Review</button></td>
+                  </ng-template>
+                  <ng-template #rating>
+                    <td (click)="openDialog(book)"><button style="border: none;background-color: inherit;outline: none;color: rgb(179, 59, 59);">{{book.review}}</button></td>
+                  </ng-template>
+                </tr>
+              </table>
+            </td>
+          </tr>
+      </table>
     </div>
 </div>

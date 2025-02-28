@@ -25,7 +25,7 @@
     <div *ngFor="let book of books" style="margin: 0px;" fxLayout="row">
       <mat-card>
         <div class="bookImageDiv" fxLayoutAlign="center">
-          <img src="{{ book.imageURL }}" />
+          <img src="{{ baseUrl + book.imageURL }}" />
         </div>
 
         <div class="bookInfoDiv" fxLayout="column">
@@ -105,7 +105,7 @@
               mat-raised-button
               fxLayoutAlign="center"
               [disableRipple]="true"
-              
+              (click)="onDeleteBook(book.bookId)"
             >
               DELETE
             </button>

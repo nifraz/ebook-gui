@@ -6,6 +6,7 @@ import {AdminService} from 'src/services/admin.service';
 import { Router, NavigationEnd } from '@angular/router';
 import {BookReviewComponent} from '../book-review/book-review.component';
 import { EditProfileComponent } from '../edit-profile/edit-profile.component';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-myorders',
@@ -13,13 +14,14 @@ import { EditProfileComponent } from '../edit-profile/edit-profile.component';
   styleUrls: ['./myorders.component.scss']
 })
 export class MyordersComponent implements OnInit {
+  baseUrl = environment.baseUrl;
 
   btnName="Review";
   bookrating:any;
   username = localStorage.getItem('name');
   usermail = localStorage.getItem('email');
-  profile = localStorage.getItem('image');
-  orderedbooks:[];
+  profile = this.baseUrl + localStorage.getItem('image');
+  orders:[];
   constructor(private userService: UserService,
               private dialog: MatDialog,
               private Adminservice: AdminService,
@@ -27,7 +29,7 @@ export class MyordersComponent implements OnInit {
   { 
       this.userService.getmyOrders().subscribe((response:any)=>{
           console.log("orders:",response);
-          this.orderedbooks=response.data;
+          this.orders=response.data;
       });
       this.router.routeReuseStrategy.shouldReuseRoute = () =>{ return false;}
   }

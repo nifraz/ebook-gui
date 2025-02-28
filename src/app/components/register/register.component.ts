@@ -18,25 +18,25 @@ export class RegisterComponent implements OnInit {
   email = new FormControl('', [Validators.required, Validators.pattern('[a-zA-Z0-9][a-zA-Z0-9_.]*@[a-zA-Z0-9]+([.][a-zA-Z]+)+')]);
   name = new FormControl('', Validators.compose([
     Validators.required,
-    Validators.minLength(3),
-    Validators.pattern('^[a-zA-z]+([\\s][a-zA-Z]+)*$')
+    Validators.minLength(6),
+    // Validators.pattern('^[a-zA-z]+([\\s][a-zA-Z]+)*$')
   ]));
   phone = new FormControl('', Validators.compose([
     Validators.required,
-    Validators.minLength(10),
-    Validators.maxLength(10),
-    Validators.pattern('(0|9)?[7-9][0-9]{9}')
+    Validators.minLength(9),
+    // Validators.maxLength(10),
+    // Validators.pattern('(0|9)?[7-9][0-9]{9}')
   ]));
   password = new FormControl('', Validators.compose([
     Validators.required,
-    Validators.minLength(8),
-    Validators.maxLength(16),
+    Validators.minLength(6),
+    // Validators.maxLength(16),
     Validators.pattern('(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,}')
   ]));
   username = new FormControl('', Validators.compose([
     Validators.required,
-    Validators.minLength(4),
-    Validators.pattern('(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,}')
+    Validators.minLength(6),
+    // Validators.pattern('(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,}')
   ]));
   passwordType = 'password';
   show = false;
@@ -87,22 +87,27 @@ export class RegisterComponent implements OnInit {
       const data = {
         email: this.email.value,
         name: this.name.value,
-        mobileNumber: this.phone.value,
+        mobileNumber: this.phone.value.toString(),
         //password: this.password.value,
         password:this.EncrDecr.set('123456$#@$^@1ERF',this.password.value),
         userName: this.username.value,
         role:this.selectedrole
       };
-      this.service.register(data).subscribe((response: any) => {
-        if(response.status==200)
-        {
-          localStorage.setItem("popup","true");
-          this.snackbar.open(response.message,'ok',{duration:5000});
-          this.router.navigate(['/login']);
-        }
-        else
-        {
-          this.snackbar.open(response.message,'Canecl',{duration:5000});
+      this.service.register(data).subscribe({
+        next: (response: any) => {
+          if(response.status==200)
+          {
+            localStorage.setItem("popup","true");
+            this.snackbar.open(response.message,'ok',{duration:5000});
+            this.router.navigate(['/login']);
+          }
+          else
+          {
+            this.snackbar.open(response.message,'Cancel',{duration:5000});
+          }
+        },
+        error: error => {
+          this.snackbar.open(error.error.message,'Cancel',{duration:5000});
         }
       });
     }

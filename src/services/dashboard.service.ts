@@ -11,6 +11,6 @@ export class DashboardService {
 
   public search(searchBook: string): Observable<any> {
     const token = '';
-    return this.http.GET('books/bookStoreApplication/getBookByAuthorName?authorName=' + searchBook, token);
+    return this.http.GET('/books/bookStoreApplication/search?text=' + searchBook, token);
   }
 }

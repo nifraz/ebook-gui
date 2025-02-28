@@ -1,12 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/services/user.service';
 import {MatSnackBar} from '@angular/material'
+import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-edit-profile',
   templateUrl: './edit-profile.component.html',
   styleUrls: ['./edit-profile.component.scss'],
 })
 export class EditProfileComponent implements OnInit {
+  baseUrl = environment.baseUrl;
+  
   public hide:boolean=true;
   profile:string=localStorage.getItem('image');
   username:string=localStorage.getItem('username');

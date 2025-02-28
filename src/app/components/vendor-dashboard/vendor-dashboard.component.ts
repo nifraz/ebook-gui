@@ -5,6 +5,7 @@ import { MessageService } from 'src/services/message.service';
 import { UserService } from 'src/services/user.service';
 import { EditProfileComponent } from '../edit-profile/edit-profile.component';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-vendor-dashboard',
@@ -12,6 +13,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./vendor-dashboard.component.scss'],
 })
 export class VendorDashboardComponent implements OnInit {
+  baseUrl = environment.baseUrl;
+  
   isBookFormOpened = false;
   file: any;
   profile: string;

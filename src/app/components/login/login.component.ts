@@ -63,7 +63,7 @@ export class LoginComponent implements OnInit {
           Validators.minLength(6),
         ],
       ],
-      userroles: ['', Validators.required],
+      userroles: ['customer', Validators.required],
     });
 
     // get return url from route parameters or default to '/'

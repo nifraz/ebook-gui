@@ -26,7 +26,7 @@ export class BookReviewComponent implements OnInit {
     console.log(this.rating);
     console.log(this.review);
     console.log("Book Review");
-    /*this.service.addReviewApp(this.review, this.rating, localStorage.getItem('token')).subscribe((data) => {
+    /*this.service.addReviewApp(this.review, this.rating, localStorage.getItem('token') || '').subscribe((data) => {
       this.rating = data.data.rating;
       this.review = data.data.review;
       if(result.staus==200)

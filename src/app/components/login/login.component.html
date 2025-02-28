@@ -61,8 +61,9 @@
           </div>
           <div>
             <mat-radio-group formControlName="userroles" #roleselected>
-              <mat-radio-button class="firstRadiobutton" value="vendor">vendor</mat-radio-button>
               <mat-radio-button value="customer">customer</mat-radio-button>
+              <mat-radio-button class="firstRadiobutton" value="vendor">vendor</mat-radio-button>
+              <mat-radio-button value="admin">admin</mat-radio-button>
               <mat-error *ngIf="LoginForm.get('userroles').hasError('required') && roleselected.touched">*role is required</mat-error><br/>
             </mat-radio-group>
           </div>

@@ -6,6 +6,7 @@ import { MessageService } from 'src/services/message.service';
 import { MatSnackBar } from '@angular/material';
 import { CartServiceService } from 'src/services/cart.service';
 import { Book } from 'src/models/book.model';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-getallwish-list',
@@ -13,7 +14,8 @@ import { Book } from 'src/models/book.model';
   styleUrls: ['./getallwish-list.component.scss']
 })
 export class GetallwishListComponent implements OnInit {
-
+  baseUrl = environment.baseUrl;
+  
   books: any;
   cart: CartModule ;
   cartBook: CartBookModule ;

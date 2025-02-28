@@ -10,29 +10,29 @@ export class AdminService {
   constructor(private http: HttpService) {}
 
   getAllSellers(): Observable<any> {
-    return this.http.GET('admin/getSellersForVerification', {
-      headers: new HttpHeaders().set('token', localStorage.getItem('token')),
+    return this.http.GET('/admin/getSellersForVerification', {
+      headers: new HttpHeaders().set('token', localStorage.getItem('token') || ''),
     });
   }
   getAllBooksForVerification(): Observable<any> {
     return this.http.GET(
-      'admin/getBooksForVerification/' + localStorage.getItem('sellerId'),
+      '/admin/getBooksForVerification/' + localStorage.getItem('sellerId'),
       {
-        headers: new HttpHeaders().set('token', localStorage.getItem('token')),
+        headers: new HttpHeaders().set('token', localStorage.getItem('token') || ''),
       }
     );
   }
   logout(): Observable<any> {
-    return this.http.PUT('users/logout', null, {
-      headers: new HttpHeaders().set('token', localStorage.getItem('token')),
+    return this.http.PUT('/users/logout', null, {
+      headers: new HttpHeaders().set('token', localStorage.getItem('token') || ''),
     });
   }
   verfy(bookId: any, sellerId: any, verification: any): Observable<any> {
     return this.http.PUT(
-      'admin/bookVerification/' + bookId + '/' + sellerId + '/' + verification,
+      '/admin/bookVerification/' + bookId + '/' + sellerId + '/' + verification,
       localStorage.getItem('description'),
       {
-        headers: new HttpHeaders().set('token', localStorage.getItem('token')),
+        headers: new HttpHeaders().set('token', localStorage.getItem('token') || ''),
       }
     );
   }

@@ -9,6 +9,7 @@ import { CartBookModule } from 'src/models/cart-book/cart-book.module';
 import { CartModule } from 'src/models/cart/cart.module';
 import { MessageService } from 'src/services/message.service';
 import { ViewWishlistComponent } from '../view-wishlist/view-wishlist.component';
+import { environment } from 'src/environments/environment';
 
 export interface DialogData {}
 @Component({
@@ -17,6 +18,8 @@ export interface DialogData {}
   styleUrls: ['./getallbooks.component.scss'],
 })
 export class GetallbooksComponent implements OnInit {
+  baseUrl = environment.baseUrl;
+  
   // pageEvent:PageEvent;
   pageIndex: number;
   countResult: any;

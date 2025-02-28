@@ -16,15 +16,8 @@
         <mat-card>
             <div
                 class="bookImageDiv"
-                fxLayoutAlign="center"
-                *ngIf="book.imageURL=='string'">
-                <img src="../../../assets/images/bookstore-wallpaper.jpg"/>
-            </div>
-            <div
-                class="bookImageDiv"
-                fxLayoutAlign="center"
-                *ngIf="book.imageURL!='string'">
-                <img src={{book.imageURL}}/>
+                fxLayoutAlign="center">
+                <img [src]="book.imageURL ? (baseUrl + book.imageURL) : '../../../assets/images/bookstore-wallpaper.jpg'"/>
             </div>
 
             <div class="bookInfoDiv" fxLayout="column">

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatSnackBar, MatDialog } from '@angular/material';
 import { AdminService } from 'src/services/admin.service';
 import { RejectionComponent } from '../rejection/rejection.component';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-get-books-for-verification',
@@ -9,6 +10,7 @@ import { RejectionComponent } from '../rejection/rejection.component';
   styleUrls: ['./get-books-for-verification.component.scss'],
 })
 export class GetBooksForVerificationComponent implements OnInit {
+  baseUrl = environment.baseUrl;
 
   books: any;
   response: any;

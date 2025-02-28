@@ -4,6 +4,7 @@ import { MessageService } from 'src/services/message.service';
 import { MatSnackBar, MatDialog, PageEvent } from '@angular/material';
 import { UpdateBookComponent } from '../update-book/update-book.component';
 import { AddBookComponent } from '../add-book/add-book.component';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-display-books',
@@ -11,12 +12,15 @@ import { AddBookComponent } from '../add-book/add-book.component';
   styleUrls: ['./display-books.component.scss'],
 })
 export class DisplayBooksComponent implements OnInit {
+  baseUrl = environment.baseUrl;
+  
   books = [];
   pages = [];
   totalPages: number;
   pageSize = 8;
   totalBooks: number;
   pageNum: number;
+
   constructor(
     private vendorService: VendorService,
     private messageService: MessageService,
@@ -78,6 +82,10 @@ export class DisplayBooksComponent implements OnInit {
   }
 
   onDeleteBook(bookId) {
+    if (!confirm('Do you want to delete this Book?')) {
+      return;
+    }
+    
     console.log(bookId);
     this.vendorService.deleteBooks(bookId).subscribe(
       (data) => {

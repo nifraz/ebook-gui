@@ -7,7 +7,7 @@
   
    <div fxLayout="row"  fxLayoutAlign="space-around center" *ngFor="let book of books">
    <div class="bookImageDiv" style="vertical-align:-150px" > 
-      <img  src={{book.imageURL}}>
+      <img  src="{{ baseUrl + book.imageURL }}">
     </div> 
      <span class="right">
          <div class="name">

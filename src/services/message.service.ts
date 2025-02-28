@@ -52,7 +52,7 @@ export class MessageService {
     });
   }
 
-  searchUserBook(event) {
+  searchAllBook(event) {
     this.dashboardService.search(event.target.value).subscribe((data) => {
       this.userMessageSource.next(data);
     });

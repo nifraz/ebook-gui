@@ -5,7 +5,7 @@
       <a
         href="http://localhost:4200/vendor-dashboard/display-books"
         style="color: white;"
-        >BookStore</a
+        >e-book</a
       >
     </div>
     <mat-card
@@ -39,7 +39,7 @@
       <img
         *ngIf="isProfileAvailable"
         mat-card-avatar
-        src="{{ this.profile }}"
+        src="{{ baseUrl + this.profile }}"
         class="profile"
       />
     </button>
@@ -54,7 +54,7 @@
         <img
           *ngIf="isProfileAvailable"
           mat-card-avatar
-          src="{{ this.profile }}"
+          src="{{ baseUrl + this.profile }}"
           class="profile"
         />
       </div>
@@ -100,7 +100,7 @@
     ngClass.gt-sm="mainContainer-lg"
   >
     <span class="mainSellingSpan">Start Selling Books-Online</span>
-    <span class="subSellingSpan">Sell On BookStore</span>
+    <span class="subSellingSpan">Sell On e-book</span>
 
     <button
       mat-raised-button

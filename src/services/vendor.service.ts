@@ -8,31 +8,31 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root',
 })
 export class VendorService {
-  private addBookApi = 'sellers/addBook/';
-  private updateBookApi = 'sellers/updateBook';
-  private deleteBookApi = 'sellers/removeBook/';
-  private displayBookApi = 'sellers/displayBooks/';
-  private uploadBookProfileApi = 'users/uploadImage';
-  private approveBookApi = 'sellers/approvalSent/';
+  private addBookApi = '/sellers/addBook/';
+  private updateBookApi = '/sellers/updateBook';
+  private deleteBookApi = '/sellers/removeBook/';
+  private displayBookApi = '/sellers/displayBooks/';
+  private uploadBookProfileApi = '/users/uploadImage';
+  private approveBookApi = '/sellers/approvalSent/';
 
   constructor(private http: HttpClient) {}
 
   addBook(book: any): Observable<any> {
     return this.http.post(environment.baseUrl + this.addBookApi, book, {
-      headers: new HttpHeaders().set('token', localStorage.getItem('token')),
+      headers: new HttpHeaders().set('token', localStorage.getItem('token') || ''),
     });
   }
 
   displayBooks(page): Observable<any> {
     return this.http.get(environment.baseUrl + this.displayBookApi, {
-      headers: new HttpHeaders().set('token', localStorage.getItem('token')),
+      headers: new HttpHeaders().set('token', localStorage.getItem('token') || ''),
       params: new HttpParams().set('pageNo',page)
     });
   }
 
   deleteBooks(bookId: any): Observable<any> {
     return this.http.delete(environment.baseUrl + this.deleteBookApi + bookId, {
-      headers: new HttpHeaders().set('token', localStorage.getItem('token')),
+      headers: new HttpHeaders().set('token', localStorage.getItem('token') || ''),
     });
   }
   uploadBookImage(file: FormData, isProfile: string): Observable<any> {
@@ -40,7 +40,7 @@ export class VendorService {
       environment.baseUrl + this.uploadBookProfileApi,
       file,
       {
-        headers: new HttpHeaders().set('token', localStorage.getItem('token')),
+        headers: new HttpHeaders().set('token', localStorage.getItem('token') || ''),
         params: new HttpParams().set('isProfile', isProfile),
       }
     );
@@ -50,7 +50,7 @@ export class VendorService {
       environment.baseUrl + this.updateBookApi + '/' + bookId,
       formGroup,
       {
-        headers: new HttpHeaders().set('token', localStorage.getItem('token')),
+        headers: new HttpHeaders().set('token', localStorage.getItem('token') || ''),
       }
     );
   }
@@ -59,7 +59,7 @@ export class VendorService {
       environment.baseUrl + this.approveBookApi + bookId,
       '',
       {
-        headers: new HttpHeaders().set('token', localStorage.getItem('token')),
+        headers: new HttpHeaders().set('token', localStorage.getItem('token') || ''),
       }
     );
   }

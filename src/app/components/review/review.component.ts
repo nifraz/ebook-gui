@@ -19,7 +19,7 @@ export class ReviewComponent implements OnInit {
   }
   onSubmit() {
     console.log(this.rating);
-    this.service.addReviewApp(this.review, this.rating, localStorage.getItem('token')).subscribe((data) => {
+    this.service.addReviewApp(this.review, this.rating, localStorage.getItem('token') || '').subscribe((data) => {
       this.rating = data.data.rating;
       this.review = data.data.review;
     });

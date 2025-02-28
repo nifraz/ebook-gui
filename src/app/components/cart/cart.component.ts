@@ -9,6 +9,7 @@ import { CartModule } from 'src/models/cart/cart.module';
 import { Router } from '@angular/router';
 import { LoginComponent } from '../login/login.component';
 import { CartBookModule } from 'src/models/cart-book/cart-book.module';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-cart',
@@ -16,6 +17,8 @@ import { CartBookModule } from 'src/models/cart-book/cart-book.module';
   styleUrls: ['./cart.component.scss'],
 })
 export class CartComponent implements OnInit ,OnChanges{
+  baseUrl = environment.baseUrl;
+  
   public show = false;
   public buttonName: any = 'Show';
   cartSize: number;
@@ -26,7 +29,7 @@ export class CartComponent implements OnInit ,OnChanges{
   disp = false;
   cart: CartModule;
   totalPrice: number;
-
+  
   constructor(
     private cartService: CartServiceService,
     private snackBar: MatSnackBar,
@@ -42,7 +45,7 @@ export class CartComponent implements OnInit ,OnChanges{
     phone: [],
     pincode: [],
     locality: [],
-    address: [],
+    addressLine: [],
     city: [],
     landmark: [],
     type: [],
@@ -255,7 +258,7 @@ export class CartComponent implements OnInit ,OnChanges{
       phoneNumber:this.addressGroup.get('phone').value,
       pincode:this.addressGroup.get('pincode').value,
       locality:this.addressGroup.get('locality').value,
-      address:this.addressGroup.get('address').value,
+      addressLine:this.addressGroup.get('addressLine').value,
       city:this.addressGroup.get('city').value,
       landmark:this.addressGroup.get('landmark').value,
       addressType:this.addressGroup.get('type').value
@@ -374,7 +377,7 @@ export class CartComponent implements OnInit ,OnChanges{
             }
           },
           (error=>{
-            this.snackBar.open('you have not provided any address,Please fill your address','ok',{duration:5000});
+            this.snackBar.open('you have not provided any address, Please fill your address','ok',{duration:5000});
           }));
       }));
   }
@@ -385,7 +388,7 @@ export class CartComponent implements OnInit ,OnChanges{
     this.addressGroup.get('phone').setValue(addr.phoneNumber);
     this.addressGroup.get('pincode').setValue(addr.pincode);
     this.addressGroup.get('locality').setValue(addr.locality);
-    this.addressGroup.get('address').setValue(addr.address);
+    this.addressGroup.get('addressLine').setValue(addr.addressLine);
     this.addressGroup.get('city').setValue(addr.city);
     this.addressGroup.get('landmark').setValue(addr.landmark);
     this.addressGroup.get('type').setValue(addr.addressType);

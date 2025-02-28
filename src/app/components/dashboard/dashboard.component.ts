@@ -9,6 +9,7 @@ import { UserService } from 'src/services/user.service';
 import { AdminService } from 'src/services/admin.service';
 import { MessageService } from 'src/services/message.service';
 import { CartServiceService } from 'src/services/cart.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-dashboard',
@@ -16,6 +17,8 @@ import { CartServiceService } from 'src/services/cart.service';
   styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent implements OnInit {
+  baseUrl = environment.baseUrl;
+  
   subscription: Subscription;
   data: any;
   isProfile = 'true';
@@ -49,7 +52,7 @@ export class DashboardComponent implements OnInit {
       if (localStorage.getItem('image') === 'null') {
         this.profile = './assets/images/user.png';
       } else {
-        this.profile = localStorage.getItem('image');
+        this.profile = this.baseUrl + localStorage.getItem('image');
       }
     }
     this.router.routeReuseStrategy.shouldReuseRoute = function() {
@@ -93,7 +96,7 @@ export class DashboardComponent implements OnInit {
   }
 
   onKey(event: any) {
-    this.messageService.searchUserBook(event);
+    this.messageService.searchAllBook(event);
     this.isCart = false;
   }
 
@@ -131,7 +134,7 @@ export class DashboardComponent implements OnInit {
         .subscribe((result: any) => {
           if (result.status === 200) {
             localStorage.setItem('image', result.data);
-            this.profile = result.data;
+            this.profile = this.baseUrl + result.data;
           }
         });
     }
