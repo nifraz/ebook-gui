@@ -205,17 +205,12 @@
             <div class="col col-6 mb-3">
               <mat-form-field appearance="outline">
                 <mat-label>District</mat-label>
-                <input
-                  matInput
-                  placeholder="District"
-                  formControlName="locality"
-                  id="locality"
-                  required
-                  #Mylocal
-                  (input)="(Mylocal.value)"
-                  style="background: none;"
-                /> </mat-form-field
-              >
+                <mat-select formControlName="locality" id="locality" required>
+                  <mat-option *ngFor="let district of districts" [value]="district">
+                    {{ district }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
             </div>
             <div class="col col-12 mb-3">
               <mat-form-field appearance="outline" fxFlexFill>

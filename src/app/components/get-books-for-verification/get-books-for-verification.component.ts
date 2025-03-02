@@ -3,6 +3,8 @@ import { MatSnackBar, MatDialog } from '@angular/material';
 import { AdminService } from 'src/services/admin.service';
 import { RejectionComponent } from '../rejection/rejection.component';
 import { environment } from 'src/environments/environment';
+import { switchMap } from 'rxjs/operators';
+import { of } from 'rxjs';
 
 @Component({
   selector: 'app-get-books-for-verification',
@@ -34,7 +36,7 @@ export class GetBooksForVerificationComponent implements OnInit {
 
   onApprove(book: any) {
 
-    this.service.verfy(book.bookId, localStorage.getItem('sellerId'), true).subscribe((data: any) => {
+    this.service.verify(book.bookId, localStorage.getItem('sellerId'), true, null).subscribe((data: any) => {
 
       this.snackBar.open(data.message, 'ok', { duration: 5000 });
       this.counter = book.bookId;
@@ -43,15 +45,28 @@ export class GetBooksForVerificationComponent implements OnInit {
     });
   }
   onReject(book: any) {
-    this.dialog.open(RejectionComponent, {width: '30%'});
-    if (localStorage.getItem('reject') === 'reject') {
-    this.service.verfy(book.bookId, localStorage.getItem('sellerId'), false).subscribe((data: any) => {
-
-      this.snackBar.open(data.message, 'ok', { duration: 5000 });
-      this.counter = book.bookId;
-      this.click[book.bookId] = this.counter;
-      this.verify[book.bookId] = 'false';
+    const dialogRef = this.dialog.open(RejectionComponent, {width: '30%'});
+    dialogRef.afterClosed().pipe(
+      switchMap((res) => {
+        if(localStorage.getItem('reject') != 'reject') {
+          this.snackBar.open('Reason is required.', 'ok', { duration: 5000 });
+          return of(null);
+        }
+        
+        return this.service.verify(book.bookId, localStorage.getItem('sellerId'), false, localStorage.getItem('description'));
+      })
+    ).subscribe({
+      next: (data) => {
+        if (data) {
+          this.snackBar.open(data.message, 'ok', { duration: 5000 });
+          this.counter = book.bookId;
+          this.click[book.bookId] = this.counter;
+          this.verify[book.bookId] = 'false';
+        }
+      },
+      error: err => {
+        this.snackBar.open(err.error.message, 'ok', { duration: 5000 });
+      }
     });
-  }
   }
 }

@@ -22,6 +22,8 @@ import {
   MatExpansionModule,
   MatSidenavModule,
   MatListModule,
+  MatSelectModule,
+  MatOptionModule,
 } from '@angular/material';
 import { HttpClientModule } from '@angular/common/http';
 import { UserService } from 'src/services/user.service';
@@ -130,7 +132,9 @@ import { RejectionComponent } from './components/rejection/rejection.component';
     MatTableModule,
     MatBadgeModule,
     NgxSpinnerModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatSelectModule,
+    MatOptionModule,
   ],
 
   entryComponents: [

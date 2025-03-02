@@ -12,8 +12,9 @@ export class RejectionComponent implements OnInit {
 
   constructor() { }
 
-
   ngOnInit() {
+    localStorage.removeItem('reject');
+    localStorage.removeItem('description');
   }
   getErrorMessage() {
     if (this.description.hasError('required')) {
@@ -21,7 +22,6 @@ export class RejectionComponent implements OnInit {
     }
   }
   onSubmit() {
-
     console.log(this.description);
     localStorage.setItem('reject', 'reject');
     localStorage.setItem('description', this.description.value);

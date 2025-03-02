@@ -68,13 +68,16 @@
               (click)="onUpdateBookForm(book)"
             />
           </div>
-          <div class="input-price" *ngIf="book.rejectionCounts > 0">
-            Rejection: {{ book.rejectionCounts }}
+          <div class="input-price" *ngIf="book.isRejected">
+            Last Rejection Reason: {{ book.lastRejectionReason }}
+          </div>
+          <div class="input-price" *ngIf="book.isRejected && book.rejectionCount > 0">
+            (Rejected {{ book.rejectionCount }} times)
           </div>
           <div fxLayout="row" fxLayoutAlign="space-between">
             <button
               class="approval-button"
-              *ngIf="!book.approved && !book.approvalSent"
+              *ngIf="!book.isApproved && !book.isApprovalSent"
               mat-raised-button
               fxLayoutAlign="center"
               [disableRipple]="true"
@@ -84,7 +87,7 @@
             </button>
             <button
               class="sent-button"
-              *ngIf="!book.approved && book.approvalSent"
+              *ngIf="!book.isApproved && book.isApprovalSent"
               mat-raised-button
               fxLayoutAlign="center"
               [disableRipple]="true"
@@ -93,7 +96,7 @@
             </button>
             <button
               class="approved-button"
-              *ngIf="book.approved"
+              *ngIf="book.isApproved"
               mat-raised-button
               fxLayoutAlign="center"
               [disableRipple]="true"

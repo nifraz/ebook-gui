@@ -27,10 +27,10 @@ export class AdminService {
       headers: new HttpHeaders().set('token', localStorage.getItem('token') || ''),
     });
   }
-  verfy(bookId: any, sellerId: any, verification: any): Observable<any> {
+  verify(bookId: any, sellerId: any, verification: any, reason: string): Observable<any> {
     return this.http.PUT(
       '/admin/bookVerification/' + bookId + '/' + sellerId + '/' + verification,
-      localStorage.getItem('description'),
+      { reason },
       {
         headers: new HttpHeaders().set('token', localStorage.getItem('token') || ''),
       }
